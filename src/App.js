@@ -15,14 +15,14 @@ class App extends Component
     ]
   };
 
-  handleSwitchName = () => 
+  handleModifyPersons = (newName) => 
   {
     this.setState
     (
       {
         persons: 
         [
-          {name: "Benoit", age: 48},
+          {name: newName, age: 48},
           {name: "Johnathan", age: 49},
           {name: "Ritamitsouko", age: 50},
           {name: "Mitsoukokokokokoko", age: 51}
@@ -31,16 +31,52 @@ class App extends Component
     );
   };
 
+  handleOnChangeName = (event) => 
+  {
+    this.setState
+    (
+      {
+        persons: 
+        [
+          {name: "Ben", age: 37},
+          {name: event.target.value, age: 42},
+          {name: "Rita", age: 12},
+          {name: "Mitsouko", age: 87}
+        ]
+      }
+    );
+  }
+
   render()
   {
     return (
       <div className="App">
         <h1>Hi, I'm a React App Again</h1>
-        <button onClick={this.handleSwitchName}>Switch name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age} />
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
-        <Person name={this.state.persons[3].name} age={this.state.persons[3].age} />
+
+        <button onClick={this.handleModifyPersons.bind(this, "Garou")}>Modify persons</button>
+
+        <Person 
+        name={this.state.persons[0].name} 
+        age={this.state.persons[0].age} 
+        />
+
+        <Person 
+        name={this.state.persons[1].name} 
+        age={this.state.persons[1].age} 
+        onClick={this.handleModifyPersons.bind(this, "Johnny")}
+        onChange={this.handleOnChangeName}
+        />
+
+        <Person 
+        name={this.state.persons[2].name} 
+        age={this.state.persons[2].age} 
+        />
+
+        <Person 
+        name={this.state.persons[3].name} 
+        age={this.state.persons[3].age} 
+        />
+
       </div>
     );
   }
