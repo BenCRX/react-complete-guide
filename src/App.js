@@ -13,9 +13,10 @@ class App extends Component {
   };
 
   handleDeletePerson = (index) => {
-    const persons = this.state.persons;
+    //const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
     persons.splice(index, 1);
-    this.setState({persons: persons});
+    this.setState({ persons: persons });
   };
 
   handleOnChangeName = (event) => {
@@ -48,7 +49,13 @@ class App extends Component {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
-            return <Person name={person.name} age={person.age} onClick={() =>this.handleDeletePerson(index)}/>;
+            return (
+              <Person
+                name={person.name}
+                age={person.age}
+                onClick={() => this.handleDeletePerson(index)}
+              />
+            );
           })}
         </div>
       );
