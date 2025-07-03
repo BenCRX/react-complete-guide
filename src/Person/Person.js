@@ -1,8 +1,8 @@
 import React from "react";
-import "./Person.css";
 import styled from "styled-components";
+import "./Person.css";
 
-//This ALREADY returns a React component
+//This returns a React component
 const StyledDiv = styled.div`
   width: 60%;
   margin: 16px auto;
