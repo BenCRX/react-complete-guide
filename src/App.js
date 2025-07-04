@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Person from "./Person/Person";
+import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
 import style from "./App.module.css";
 
 class App extends Component {
@@ -42,20 +43,23 @@ class App extends Component {
 
   render() {
     let persons = null;
-    let btnStyle = '';
+    let btnStyle = "";
 
     if (this.state.showPersons) {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
             return (
-              <Person
-                key={person.id}
-                name={person.name}
-                age={person.age}
-                onClick={() => this.handleDeletePerson(index)}
-                onChange={(event) => this.handleOnChangeName(event, person.id)}
-              />
+              <ErrorBoundary key={person.id}>
+                <Person
+                  name={person.name}
+                  age={person.age}
+                  onClick={() => this.handleDeletePerson(index)}
+                  onChange={(event) =>
+                    this.handleOnChangeName(event, person.id)
+                  }
+                />
+              </ErrorBoundary>
             );
           })}
         </div>
