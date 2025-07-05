@@ -2,11 +2,6 @@ import React from "react";
 import style from "./Person.module.css";
 
 const person = (props) => {
-  const rnd = Math.random();
-  if (rnd > 0.9) {
-    throw new Error("Something went wrong");
-  };
-
   return (
     <div className={style.Person}>
       <p onClick={props.onClick}>
