@@ -4,6 +4,11 @@ import Persons from "../components/Persons/Persons";
 import style from "./App.module.css";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log("[App.js] constructor");
+  }
+
   state = {
     persons: [
       { id: "98745", name: "Ben", age: 37 },
@@ -12,6 +17,15 @@ class App extends Component {
     ],
     showPersons: false,
   };
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[Apps.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount(){
+    console.log('[App.js] componentDidMount');
+  }
 
   handleDeletePerson = (index) => {
     //Create a copy of the state array otherwise since persons is a pointer it will modify the state and this is not something you want to do. Therefor, using the .slice() method or the spread operator [...array]
@@ -42,6 +56,8 @@ class App extends Component {
   };
 
   render() {
+    console.log('[App.js] render');
+
     let persons = null;
 
     if (this.state.showPersons) {
@@ -57,6 +73,7 @@ class App extends Component {
     return (
       <div className={style.App}>
         <Cockpit
+          appTitle={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.handleTogglePersons}
