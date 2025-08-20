@@ -19,12 +19,21 @@ class App extends Component {
   };
 
   static getDerivedStateFromProps(props, state) {
-    console.log('[Apps.js] getDerivedStateFromProps', props);
+    console.log("[Apps.js] getDerivedStateFromProps", props);
     return state;
   }
 
-  componentDidMount(){
-    console.log('[App.js] componentDidMount');
+  componentDidMount() {
+    console.log("[App.js] componentDidMount");
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[App.js] shouldComponentUpdate");
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log("[App.js] componentDidUpdate");
   }
 
   handleDeletePerson = (index) => {
@@ -56,7 +65,7 @@ class App extends Component {
   };
 
   render() {
-    console.log('[App.js] render');
+    console.log("[App.js] render");
 
     let persons = null;
 
