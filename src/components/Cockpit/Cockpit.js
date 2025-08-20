@@ -4,12 +4,17 @@ import style from "./Cockpit.module.css";
 const Cockpit = (props) =>
 {
 
-  // the functionnal component version of componentDidMount and componentDidUpdate in one method only
+  // the functional component version of componentDidMount and componentDidUpdate in one method only
   useEffect(() => 
   {
     console.log('[Cockpit.js] useEffect');
     setTimeout(() => alert('saved data'), 1000);
-  }, [props.persons]);
+
+    // adding a return to the function is kind of the equivalent of componentWillUnmount for a functional component
+    return () => {
+      console.log('[Cockpit.js] cleanup work in useEffect');
+    }
+  }, [props.persons]); // the useEffect function accept an array as the second argument. Updates of the elements of the array will be checked and the useEffect function will be called when there is a change. This is the equivalent of componentDidUpdate in a functional component. Empty array will be like using componentDidMount.
 
   const modifiedClasses = [];
   let btnStyle = "";
