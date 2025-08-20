@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./Cockpit.module.css";
 
-const cockpit = (props) => {
+const Cockpit = (props) =>
+{
+
+  // the functionnal component version of componentDidMount and componentDidUpdate in one method only
+  useEffect(() => {console.log('[Cockpit.js] useEffect')});
+
   const modifiedClasses = [];
   let btnStyle = "";
 
-  if (props.showPersons) {
+  if (props.showPersons)
+  {
     btnStyle = style.Red;
   }
 
-  if (props.persons.length <= 2) {
+  if (props.persons.length <= 2)
+  {
     modifiedClasses.push(style.redText);
   }
 
-  if (props.persons.length <= 1) {
+  if (props.persons.length <= 1)
+  {
     modifiedClasses.push(style.boldText);
   }
 
@@ -29,4 +37,4 @@ const cockpit = (props) => {
   );
 };
 
-export default cockpit;
+export default Cockpit;

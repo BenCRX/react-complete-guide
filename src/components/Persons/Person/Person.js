@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import style from "./Person.module.css";
 
-class Person extends Component {
-  render() {
+class Person extends Component
+{
+  render()
+  {
     console.log("[Person.js] rendering...");
     return (
       <div className={style.Person}>

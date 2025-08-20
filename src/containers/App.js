@@ -3,8 +3,10 @@ import Cockpit from "../components/Cockpit/Cockpit";
 import Persons from "../components/Persons/Persons";
 import style from "./App.module.css";
 
-class App extends Component {
-  constructor(props) {
+class App extends Component
+{
+  constructor(props)
+  {
     super(props);
     console.log("[App.js] constructor");
   }
@@ -18,25 +20,30 @@ class App extends Component {
     showPersons: false,
   };
 
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props, state)
+  {
     console.log("[Apps.js] getDerivedStateFromProps", props);
     return state;
   }
 
-  componentDidMount() {
+  componentDidMount()
+  {
     console.log("[App.js] componentDidMount");
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState)
+  {
     console.log("[App.js] shouldComponentUpdate");
     return true;
   }
 
-  componentDidUpdate() {
+  componentDidUpdate()
+  {
     console.log("[App.js] componentDidUpdate");
   }
 
-  handleDeletePerson = (index) => {
+  handleDeletePerson = (index) =>
+  {
     //Create a copy of the state array otherwise since persons is a pointer it will modify the state and this is not something you want to do. Therefor, using the .slice() method or the spread operator [...array]
     //const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
@@ -44,8 +51,10 @@ class App extends Component {
     this.setState({ persons: persons });
   };
 
-  handleOnChangeName = (event, id) => {
-    const personIndex = this.state.persons.findIndex((p) => {
+  handleOnChangeName = (event, id) =>
+  {
+    const personIndex = this.state.persons.findIndex((p) =>
+    {
       return p.id === id;
     });
 
@@ -59,17 +68,20 @@ class App extends Component {
     this.setState({ persons: tempPersons });
   };
 
-  handleTogglePersons = () => {
+  handleTogglePersons = () =>
+  {
     const doesShow = this.state.showPersons;
     this.setState({ showPersons: !doesShow });
   };
 
-  render() {
+  render()
+  {
     console.log("[App.js] render");
 
     let persons = null;
 
-    if (this.state.showPersons) {
+    if (this.state.showPersons)
+    {
       persons = (
         <Persons
           persons={this.state.persons}
