@@ -5,7 +5,11 @@ const Cockpit = (props) =>
 {
 
   // the functionnal component version of componentDidMount and componentDidUpdate in one method only
-  useEffect(() => {console.log('[Cockpit.js] useEffect')});
+  useEffect(() => 
+  {
+    console.log('[Cockpit.js] useEffect');
+    setTimeout(() => alert('saved data'), 1000);
+  }, [props.persons]);
 
   const modifiedClasses = [];
   let btnStyle = "";
