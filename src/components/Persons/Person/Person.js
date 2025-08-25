@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Auxiliary from "../../../hoc/Auxiliary";
 import style from "./Person.module.css";
 
 class Person extends Component
@@ -7,17 +8,21 @@ class Person extends Component
   {
     console.log("[Person.js] rendering...");
 
-    // You should usually have a parent element when you return some JSX but it is possible to return an array as long as elements of the array have a proper key
-    return [
-      <p key="i1" onClick={this.props.onClick}>I'm {this.props.name} and I am {this.props.age} years old</p>,
-      <p key="i2">{this.props.children}</p>,
-      <input
-        key="i3"
-        type="text"
-        onChange={this.props.onChange}
-        value={this.props.name}
-      />,
-    ];
+    // You should usually have a parent element when you return some JSX but alternatively you can use an auxiliary HOC that only return its children as props.
+    return (
+      <Auxiliary>
+        <p key="i1" onClick={this.props.onClick}>
+          I'm {this.props.name} and I am {this.props.age} years old
+        </p>
+        ,<p key="i2">{this.props.children}</p>
+        <input
+          key="i3"
+          type="text"
+          onChange={this.props.onChange}
+          value={this.props.name}
+        />
+      </Auxiliary>
+    );
   }
 }
 
