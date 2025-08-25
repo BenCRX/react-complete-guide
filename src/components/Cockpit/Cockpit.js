@@ -7,7 +7,7 @@ const Cockpit = (props) =>
   useEffect(() =>
   {
     console.log("[Cockpit.js] useEffect");
-    setTimeout(() => alert("saved data"), 1000);
+    //setTimeout(() => alert("saved data"), 1000);
 
     // adding a return to the function is kind of the equivalent of componentWillUnmount for a functional component
     return () =>
@@ -24,12 +24,12 @@ const Cockpit = (props) =>
     btnStyle = style.Red;
   }
 
-  if (props.persons.length <= 2)
+  if (props.personsLength <= 2)
   {
     modifiedClasses.push(style.redText);
   }
 
-  if (props.persons.length <= 1)
+  if (props.personsLength <= 1)
   {
     modifiedClasses.push(style.boldText);
   }
@@ -46,4 +46,5 @@ const Cockpit = (props) =>
   );
 };
 
-export default Cockpit;
+// React.memo() is the functionnal component version of shouldComponentUpdate
+export default React.memo(Cockpit);
