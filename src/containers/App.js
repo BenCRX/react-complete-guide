@@ -20,6 +20,7 @@ class App extends Component
     ],
     showPersons: false,
     showCockpit: true,
+    changeCounter: 0,
   };
 
   static getDerivedStateFromProps(props, state)
@@ -67,7 +68,14 @@ class App extends Component
     const tempPersons = [...this.state.persons];
     tempPersons[personIndex] = tempPerson;
 
-    this.setState({ persons: tempPersons });
+    //This is the optimal way to update a sate whenever a state update depends on the old state
+    this.setState((prevState, props) =>
+    {
+      return {
+        persons: tempPersons,
+        changeCounter: prevState.changeCounter + 1,
+      };
+    });
   };
 
   handleTogglePersons = () =>
