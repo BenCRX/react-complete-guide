@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Cockpit from "../components/Cockpit/Cockpit";
 import Persons from "../components/Persons/Persons";
 import style from "./App.module.css";
-import WithClass from "../hoc/WithClass";
+import withClass from "../hoc/withClass";
 
 class App extends Component
 {
@@ -94,7 +94,7 @@ class App extends Component
     }
 
     return (
-      <WithClass style={style.App}>
+      <div>
         <button
           onClick={() =>
           {
@@ -112,9 +112,10 @@ class App extends Component
           />
         ) : null}
         {persons}
-      </WithClass>
+      </div>
     );
   }
 }
 
-export default App;
+//Maybe not the best example here but that would be another way to create and use a HOC, but most of the time when it's for style or stuff related to the JSX itself, you are probably better off with the previous version of the HOC (with a wrapping component). This will mostly be used in cases where you need some code to run in the backend maybe ?
+export default withClass(App, style.App);
