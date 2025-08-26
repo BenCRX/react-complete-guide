@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Auxiliary from "../../../hoc/Auxiliary";
 import style from "./Person.module.css";
 
 class Person extends Component
@@ -8,9 +7,9 @@ class Person extends Component
   {
     console.log("[Person.js] rendering...");
 
-    // You should usually have a parent element when you return some JSX but alternatively you can use an auxiliary HOC that only return its children as props.
+    // You should usually have a parent element when you return some JSX but alternatively you can use React.Fragment instead of the Auxiliary HOC we created earlier to do the job (and instead of a div)
     return (
-      <Auxiliary>
+      <React.Fragment>
         <p key="i1" onClick={this.props.onClick}>
           I'm {this.props.name} and I am {this.props.age} years old
         </p>
@@ -21,7 +20,7 @@ class Person extends Component
           onChange={this.props.onChange}
           value={this.props.name}
         />
-      </Auxiliary>
+      </React.Fragment>
     );
   }
 }
