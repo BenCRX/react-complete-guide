@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import style from "./Person.module.css";
 import withClass from "../../../hoc/withClass";
 import Auxiliary from "../../../hoc/Auxiliary";
+import PropTypes from "prop-types";
 
 class Person extends Component
 {
@@ -26,5 +27,13 @@ class Person extends Component
     );
   }
 }
+
+//This is useful when working with a team to ensure that the types of the props are the correct one, otherwise you'll have a warning on the console
+Person.propTypes = {
+  onClick: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  onChange: PropTypes.func
+};
 
 export default withClass(Person, style.Person);
