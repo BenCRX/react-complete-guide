@@ -6,6 +6,18 @@ import PropTypes from "prop-types";
 
 class Person extends Component
 {
+  constructor(props)
+  {
+    super(props);
+    this.inputElementRef = React.createRef();
+  }
+
+  componentDidMount()
+  {
+    //this.inputElement.focus();
+    this.inputElementRef.current.focus();
+  }
+
   render()
   {
     console.log("[Person.js] rendering...");
@@ -18,6 +30,8 @@ class Person extends Component
         </p>
         <p key="i2">{this.props.children}</p>
         <input
+          //ref={(inputEl) =>{this.inputElement = inputEl;}}
+          ref={this.inputElementRef}
           key="i3"
           type="text"
           onChange={this.props.onChange}
@@ -33,7 +47,7 @@ Person.propTypes = {
   onClick: PropTypes.func,
   name: PropTypes.string,
   age: PropTypes.number,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 export default withClass(Person, style.Person);
