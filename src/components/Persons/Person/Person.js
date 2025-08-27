@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 
 class Person extends Component
 {
+  // This is the modern way to use Refs in order to catch specific elements in order to "do" something with them. The examples are quite stupide but in this case we are focusing on the input of the last element (person) created. The older way is with the ref={(inputEl) =>{this.inputElement = inputEl;}} commented below
   constructor(props)
   {
     super(props);

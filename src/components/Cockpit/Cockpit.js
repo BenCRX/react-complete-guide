@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import style from "./Cockpit.module.css";
 
 const Cockpit = (props) =>
 {
+  // This is how you use ref in functionnal components. You need to import useRef.
+  const toggleBtnRef = useRef(null);
+
   // the functional component version of componentDidMount and componentDidUpdate in one method only
   useEffect(() =>
   {
     console.log("[Cockpit.js] useEffect");
+    toggleBtnRef.current.click();
     //setTimeout(() => alert("saved data"), 1000);
 
     // adding a return to the function is kind of the equivalent of componentWillUnmount for a functional component
@@ -39,7 +43,7 @@ const Cockpit = (props) =>
       <h1>{props.appTitle}</h1>
       <p className={modifiedClasses.join(" ")}>This is working !</p>
 
-      <button className={btnStyle} onClick={props.clicked}>
+      <button ref={toggleBtnRef} className={btnStyle} onClick={props.clicked}>
         Show persons
       </button>
     </div>
