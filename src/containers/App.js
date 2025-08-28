@@ -3,6 +3,7 @@ import Cockpit from "../components/Cockpit/Cockpit";
 import Persons from "../components/Persons/Persons";
 import style from "./App.module.css";
 import withClass from "../hoc/withClass";
+import AuthContext from "../context/auth-context";
 
 class App extends Component
 {
@@ -21,6 +22,7 @@ class App extends Component
     showPersons: false,
     showCockpit: true,
     changeCounter: 0,
+    authenticated: false,
   };
 
   static getDerivedStateFromProps(props, state)
@@ -84,6 +86,11 @@ class App extends Component
     this.setState({ showPersons: !doesShow });
   };
 
+  handleAuthentication = () =>
+  {
+    this.setState({ authenticated: true });
+  };
+
   render()
   {
     console.log("[App.js] render");
@@ -97,10 +104,12 @@ class App extends Component
           persons={this.state.persons}
           clicked={this.handleDeletePerson}
           changed={this.handleOnChangeName}
+          isAuthenticated={this.state.authenticated}
         />
       );
     }
 
+    // AuthContext Providers and Consumers are a way to pass data through specific components without having to pass that data through each component in the line. In this example with pass data to the Person component without passing that data through the Persons component
     return (
       <div>
         <button
@@ -111,15 +120,22 @@ class App extends Component
         >
           Remove cockpit
         </button>
-        {this.state.showCockpit ? (
-          <Cockpit
-            appTitle={this.props.appTitle}
-            showPersons={this.state.showPersons}
-            personsLength={this.state.persons.length}
-            clicked={this.handleTogglePersons}
-          />
-        ) : null}
-        {persons}
+        <AuthContext.Provider
+          value={{
+            authenticated: this.state.authenticated,
+            authentication: this.handleAuthentication,
+          }}
+        >
+          {this.state.showCockpit ? (
+            <Cockpit
+              appTitle={this.props.appTitle}
+              showPersons={this.state.showPersons}
+              personsLength={this.state.persons.length}
+              clicked={this.handleTogglePersons}
+            />
+          ) : null}
+          {persons}
+        </AuthContext.Provider>
       </div>
     );
   }

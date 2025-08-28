@@ -3,6 +3,7 @@ import style from "./Person.module.css";
 import withClass from "../../../hoc/withClass";
 import Auxiliary from "../../../hoc/Auxiliary";
 import PropTypes from "prop-types";
+import AuthContext from "../../../context/auth-context";
 
 class Person extends Component
 {
@@ -26,6 +27,10 @@ class Person extends Component
     // You should usually have a parent element when you return some JSX but alternatively you can use React.Fragment instead of the Auxiliary HOC we created earlier to do the job (and instead of a div)
     return (
       <Auxiliary>
+        <AuthContext.Consumer>
+          {(context) =>context.authenticated ? <p>Authenticated</p> : <p>Please log in</p>}
+        </AuthContext.Consumer>
+
         <p key="i1" onClick={this.props.onClick}>
           I'm {this.props.name} and I am {this.props.age} years old
         </p>
