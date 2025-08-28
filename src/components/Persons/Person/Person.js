@@ -14,10 +14,14 @@ class Person extends Component
     this.inputElementRef = React.createRef();
   }
 
+  // In class base component, you can have a property specifically named contextType that allows you to access whatever you put in your context outside of JSX. In this example I am retrieving some context information inside the componentDidMount method. Also it's easier to read in the JSX than the former wrapping component and its anonymous method (check previous commit)
+  static contextType = AuthContext;
+
   componentDidMount()
   {
     //this.inputElement.focus();
     this.inputElementRef.current.focus();
+    console.log(this.context.authenticated);
   }
 
   render()
@@ -27,9 +31,7 @@ class Person extends Component
     // You should usually have a parent element when you return some JSX but alternatively you can use React.Fragment instead of the Auxiliary HOC we created earlier to do the job (and instead of a div)
     return (
       <Auxiliary>
-        <AuthContext.Consumer>
-          {(context) =>context.authenticated ? <p>Authenticated</p> : <p>Please log in</p>}
-        </AuthContext.Consumer>
+        {this.context.authenticated ? <p>Authenticated</p> : <p>Please log in</p>}
 
         <p key="i1" onClick={this.props.onClick}>
           I'm {this.props.name} and I am {this.props.age} years old

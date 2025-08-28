@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import style from "./Cockpit.module.css";
 import AuthContext from "../../context/auth-context";
 
@@ -6,6 +6,11 @@ const Cockpit = (props) =>
 {
   // This is how you use ref in functionnal components. You need to import useRef.
   const toggleBtnRef = useRef(null);
+  // This is how you can use context in a functionnal component. You need to import useContext hook. Same as in class base component, this way of accessing context allows you to make use of it outside of JSX and is more convenient to read.
+  const authContext = useContext(AuthContext);
+
+  console.log(authContext.authenticated);
+
 
   // the functional component version of componentDidMount and componentDidUpdate in one method only
   useEffect(() =>
@@ -47,9 +52,9 @@ const Cockpit = (props) =>
       <button ref={toggleBtnRef} className={btnStyle} onClick={props.clicked}>
         Show persons
       </button>
-      <AuthContext.Consumer>
-        {(context) => <button onClick={context.authentication}>Log in</button>}
-      </AuthContext.Consumer>
+
+      <button onClick={authContext.authentication}>Log in</button>
+
     </div>
   );
 };
