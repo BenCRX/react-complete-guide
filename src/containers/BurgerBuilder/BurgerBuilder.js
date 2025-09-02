@@ -19,7 +19,7 @@ class BurgerBuilder extends Component
     {
         return (
             <React.Fragment>
-                <Burger ingredients={this.state.ingredients}/>
+                <Burger ingredients={this.state.ingredients} />
                 <BuildControls />
             </React.Fragment>
         );
