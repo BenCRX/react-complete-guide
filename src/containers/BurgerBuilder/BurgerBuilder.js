@@ -18,26 +18,8 @@ class BurgerBuilder extends Component
             cheese: 0,
             meat: 0,
         },
-        totalPrice: 4,
+        totalPrice: 4
     };
-
-    // removeIngredientHandler = (ingredientType) =>
-    // {
-    //     const oldIngredientsCount = this.state.ingredients[ingredientType];
-    //     if(oldIngredientsCount <= 0)
-    //     {
-    //         return;
-    //     }
-    //     const updatedIngredientsCount = oldIngredientsCount - 1;
-    //     const updatedIngredients = { ...this.state.ingredients };
-    //     updatedIngredients[ingredientType] = updatedIngredientsCount;
-
-    //     const priceDeduction = INGREDIENT_PRICE[ingredientType];
-    //     const oldPrice = this.state.totalPrice;
-    //     const updatedPrice = oldPrice - priceDeduction;
-
-    //     this.setState({ totalPrice: updatedPrice, ingredients: updatedIngredients })
-    // };
 
     removeIngredientHandler = (ingredientType) =>
     {
@@ -58,20 +40,6 @@ class BurgerBuilder extends Component
             };
         });
     };
-
-    // addIngredientHandler = (ingredientType) =>
-    // {
-    //     const oldIngredientsCount = this.state.ingredients[ingredientType];
-    //     const updatedIngredientsCount = oldIngredientsCount + 1;
-    //     const updatedIngredients = { ...this.state.ingredients };
-    //     updatedIngredients[ingredientType] = updatedIngredientsCount;
-
-    //     const priceAddition = INGREDIENT_PRICE[ingredientType];
-    //     const oldPrice = this.state.totalPrice;
-    //     const updatedPrice = oldPrice + priceAddition;
-
-    //     this.setState({totalPrice: updatedPrice, ingredients: updatedIngredients})
-    // };
 
     addIngredientHandler = (ingredientType) =>
     {
@@ -96,6 +64,7 @@ class BurgerBuilder extends Component
             <React.Fragment>
                 <Burger ingredients={this.state.ingredients} />
                 <BuildControls
+                    burgerPrice={this.state.totalPrice}
                     removeIngredient={this.removeIngredientHandler}
                     addIngredient={this.addIngredientHandler}
                     disableButton={disableInfo}
