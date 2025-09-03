@@ -22,52 +22,43 @@ class BurgerBuilder extends Component
         purchasable: false,
     };
 
-
-    removeIngredientHandler = (type) =>
+    updateIngredient = (type, delta) =>
     {
         const oldCount = this.state.ingredients[type];
-        if (oldCount <= 0)
-        {
-            return;
-        }
-        const updatedCount = oldCount - 1;
+        const newCount = oldCount + delta;
+
+        // Prevent negative counts
+        if (newCount < 0) return;
+
         const updatedIngredients = {
-            ...this.state.ingredients
+            ...this.state.ingredients,
+            [type]: newCount
         };
-        updatedIngredients[type] = updatedCount;
-        const priceDeduction = INGREDIENT_PRICE[type];
-        const oldPrice = this.state.totalPrice;
-        const newPrice = oldPrice - priceDeduction;
-        this.setState({ totalPrice: newPrice, ingredients: updatedIngredients });
+
+        const priceChange = INGREDIENT_PRICE[type] * delta;
+        const newPrice = this.state.totalPrice + priceChange;
+
+        this.setState({
+            totalPrice: newPrice,
+            ingredients: updatedIngredients
+        });
+
         this.updatePurchaseState(updatedIngredients);
-    }
+    };
 
     addIngredientHandler = (type) =>
     {
-        const oldCount = this.state.ingredients[type];
-        const updatedCount = oldCount + 1;
-        const updatedIngredients = {
-            ...this.state.ingredients
-        };
-        updatedIngredients[type] = updatedCount;
-        const priceAddition = INGREDIENT_PRICE[type];
-        const oldPrice = this.state.totalPrice;
-        const newPrice = oldPrice + priceAddition;
-        this.setState({ totalPrice: newPrice, ingredients: updatedIngredients });
-        this.updatePurchaseState(updatedIngredients);
-    }
+        this.updateIngredient(type, 1);
+    };
+
+    removeIngredientHandler = (type) =>
+    {
+        this.updateIngredient(type, -1);
+    };
 
     updatePurchaseState(ingredients)
     {
-        const sum = Object.keys(ingredients)
-            .map(igKey =>
-            {
-                return ingredients[igKey];
-            })
-            .reduce((sum, el) =>
-            {
-                return sum + el;
-            }, 0);
+        const sum = Object.values(ingredients).reduce((sum, count) => sum + count, 0);
         this.setState({ purchasable: sum > 0 });
     }
 
