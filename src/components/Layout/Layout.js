@@ -5,7 +5,6 @@ import style from "./Layout.module.css"
 const Layout = (props) =>
 {
     return (
-        //Could be the HOC Auxiliary component as well I guess
         <React.Fragment>
             <div>Toolbar, Sidedrawer, Backdrop</div>
 
