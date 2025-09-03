@@ -21,6 +21,44 @@ class BurgerBuilder extends Component
         totalPrice: 4,
     };
 
+    // removeIngredientHandler = (ingredientType) =>
+    // {
+    //     const oldIngredientsCount = this.state.ingredients[ingredientType];
+    //     if(oldIngredientsCount <= 0)
+    //     {
+    //         return;
+    //     }
+    //     const updatedIngredientsCount = oldIngredientsCount - 1;
+    //     const updatedIngredients = { ...this.state.ingredients };
+    //     updatedIngredients[ingredientType] = updatedIngredientsCount;
+
+    //     const priceDeduction = INGREDIENT_PRICE[ingredientType];
+    //     const oldPrice = this.state.totalPrice;
+    //     const updatedPrice = oldPrice - priceDeduction;
+
+    //     this.setState({ totalPrice: updatedPrice, ingredients: updatedIngredients })
+    // };
+
+    removeIngredientHandler = (ingredientType) =>
+    {
+        this.setState((prevState) =>
+        {
+            const oldIngredientCount = prevState.ingredients[ingredientType];
+            if (oldIngredientCount <= 0)
+            {
+                return null;
+            }
+
+            return {
+                ingredients: {
+                    ...prevState.ingredients,
+                    [ingredientType]: oldIngredientCount - 1,
+                },
+                totalPrice: prevState.totalPrice - INGREDIENT_PRICE[ingredientType],
+            };
+        });
+    };
+
     // addIngredientHandler = (ingredientType) =>
     // {
     //     const oldIngredientsCount = this.state.ingredients[ingredientType];
@@ -46,14 +84,22 @@ class BurgerBuilder extends Component
         }));
     };
 
-    removeIngredientHandler = (ingredientType) => { };
-
     render()
     {
+        const disableInfo = { ...this.state.ingredients };
+        for (let key in disableInfo)
+        {
+            disableInfo[key] = disableInfo[key] <= 0;
+        }
+
         return (
             <React.Fragment>
                 <Burger ingredients={this.state.ingredients} />
-                <BuildControls addIngredient={this.addIngredientHandler} />
+                <BuildControls
+                    removeIngredient={this.removeIngredientHandler}
+                    addIngredient={this.addIngredientHandler}
+                    disableButton={disableInfo}
+                />
             </React.Fragment>
         );
     }
