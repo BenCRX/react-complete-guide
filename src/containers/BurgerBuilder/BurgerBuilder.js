@@ -22,6 +22,7 @@ class BurgerBuilder extends Component
         },
         totalPrice: 4,
         purchasable: false,
+        ordering: false
     };
 
     updateIngredient = (type, delta) =>
@@ -58,11 +59,16 @@ class BurgerBuilder extends Component
         this.updateIngredient(type, -1);
     };
 
+    orderingHandler = () =>
+    {
+        this.setState({ordering: true});
+    };
+
     updatePurchaseState(ingredients)
     {
         const sum = Object.values(ingredients).reduce((sum, count) => sum + count, 0);
         this.setState({ purchasable: sum > 0 });
-    }
+    };
 
     render()
     {
@@ -74,13 +80,14 @@ class BurgerBuilder extends Component
 
         return (
             <React.Fragment>
-                <Modal>
+                <Modal show={this.state.ordering}>
                     <OrderSummary ingredients={this.state.ingredients}/>
                 </Modal>
                 <Burger ingredients={this.state.ingredients} />
                 <BuildControls
                     removeIngredient={this.removeIngredientHandler}
                     addIngredient={this.addIngredientHandler}
+                    ordering={this.orderingHandler}
                     disableButton={disableInfo}
                     burgerPrice={this.state.totalPrice}
                     purchasable={this.state.purchasable}
