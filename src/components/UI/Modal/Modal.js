@@ -6,7 +6,7 @@ const Modal = (props) =>
 {
     return (
         <React.Fragment>
-            <Backdrop show={props.show} clicked={props.closeModal}/>
+            <Backdrop show={props.show} cancelOrdering={props.cancelOrdering}/>
             <div
                 className={style.Modal}
                 style=
