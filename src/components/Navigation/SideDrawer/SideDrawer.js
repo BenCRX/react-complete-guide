@@ -7,7 +7,7 @@ const SideDrawer = (props) =>
 {
   return (
     <div className={style.SideDrawer}>
-      <Logo height="10%"/>
+      <Logo specificStyling={{height:"10%", marginBottom: "32px"}}/>
       <nav>
         <NavigationItems />
       </nav>
