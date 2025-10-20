@@ -6,7 +6,7 @@ import style from "./Layout.module.css";
 class Layout extends Component
 {
     state = {
-        showSideDrawer: true,
+        showSideDrawer: false,
     };
 
     closeSideDrawerHandler = () =>
@@ -14,12 +14,23 @@ class Layout extends Component
         this.setState({ showSideDrawer: false });
     };
 
+    toggleSideDrawerHandler = () =>
+    {
+        this.setState((prevState) => 
+        {
+            return { showSideDrawer: !prevState.showSideDrawer };
+        });
+    };
+
     render()
     {
         return (
             <React.Fragment>
-                <Toolbar />
-                <SideDrawer show={this.state.showSideDrawer} cancel={this.closeSideDrawerHandler}/>
+                <Toolbar onClickDrawerToggle={this.toggleSideDrawerHandler} />
+                <SideDrawer
+                    show={this.state.showSideDrawer}
+                    cancel={this.closeSideDrawerHandler}
+                />
                 <main className={style.Content}>{this.props.children}</main>
             </React.Fragment>
         );
